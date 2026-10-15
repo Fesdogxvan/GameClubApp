@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="GameClub.Tests/GameClub.Tests.csproj" Id="1f067ccc-2939-4f06-8409-8e58d6cb0207" />
+  <Project Path="GameClub/GameClub.csproj" Id="7e3d1c70-825e-4a32-b876-88b557c9e137" />
+</Solution>

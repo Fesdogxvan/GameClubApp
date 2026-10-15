@@ -1,0 +1,161 @@
+﻿<Page x:Class="GameClub.Pages.SessionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="SessionsPage"
+      Background="#1E1E2E">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Активные сессии"
+                   Foreground="White"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Margin="0,0,0,15"/>
+
+        <Border Grid.Row="1"
+                Background="#2A2A3E"
+                CornerRadius="8"
+                Padding="15"
+                Margin="0,0,0,15">
+            <StackPanel>
+                <TextBlock Text="Новая сессия"
+                           Foreground="White"
+                           FontSize="15"
+                           FontWeight="Bold"
+                           Margin="0,0,0,10"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                        <TextBlock Text="Клиент" Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CbCustomer" DisplayMemberPath="FullName"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                        <TextBlock Text="Рабочее место" Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CbWorkstation"
+                                  DisplayMemberPath="DisplayName"
+                                  SelectionChanged="CbWorkstation_SelectionChanged"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Margin="0,0,10,0">
+                        <TextBlock Text="Тариф" Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CbTariff"
+                                  DisplayMemberPath="DisplayName"
+                                  SelectionChanged="CbTariff_SelectionChanged"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" Margin="0,0,10,0">
+                        <TextBlock Text="Игра" Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CbGame" DisplayMemberPath="Name"/>
+                    </StackPanel>
+
+                    <Button Grid.Column="4"
+                            Content="Старт"
+                            Click="BtnStart_Click"
+                            Style="{StaticResource ActionButton}"
+                            Height="38"
+                            Margin="0,18,0,0"
+                            Width="110"/>
+                </Grid>
+
+                <TextBlock x:Name="TbStartHint"
+                           Foreground="#A0A0B0"
+                           FontSize="11"
+                           Margin="0,10,0,0"
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,15">
+            <Button Content="Обновить"
+                    Click="BtnRefresh_Click"
+                    Style="{StaticResource ActionButton}"/>
+            <TextBlock x:Name="TbStats"
+                       Foreground="#A0A0B0"
+                       FontSize="13"
+                       VerticalAlignment="Center"
+                       Margin="15,0,0,0"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="3"
+                  x:Name="DgSessions"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  Background="#2A2A3E"
+                  Foreground="White"
+                  RowBackground="#2A2A3E"
+                  AlternatingRowBackground="#252535"
+                  BorderBrush="#3A3A4E"
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="#3A3A4E"
+                  HeadersVisibility="Column"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  SelectionChanged="DgSessions_SelectionChanged">
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#252535"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="10,8"/>
+                    <Setter Property="BorderBrush" Value="#3A3A4E"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="10,6"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#7B68EE"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding SessionID}" Width="50"/>
+                <DataGridTextColumn Header="Клиент" Binding="{Binding Customer.FullName}" Width="*"/>
+                <DataGridTextColumn Header="ПК" Binding="{Binding Workstation.Name}" Width="140"/>
+                <DataGridTextColumn Header="Тариф" Binding="{Binding Tariff.Name}" Width="110"/>
+                <DataGridTextColumn Header="Игра" Binding="{Binding Game.Name}" Width="180"/>
+                <DataGridTextColumn Header="Начало" Binding="{Binding StartTime, StringFormat=dd.MM.yyyy HH:mm}" Width="140"/>
+                <DataGridTextColumn Header="Минут" Binding="{Binding MinutesPlayed}" Width="70"/>
+                <DataGridTextColumn Header="Накоплено, ₽" Binding="{Binding CurrentCost, StringFormat={}{0:N2}}" Width="120"/>
+
+                <DataGridTemplateColumn Header="Действие" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Завершить"
+                        Click="BtnFinishRow_Click"
+                        Background="#E53935"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Padding="10,5"
+                        Cursor="Hand"
+                        Tag="{Binding}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
