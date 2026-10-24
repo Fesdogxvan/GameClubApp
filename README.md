@@ -10,8 +10,10 @@
 ## Визуальная демонстрация
 
 *Главное окно со списком рабочих мест:*
+<img width="1852" height="928" alt="image" src="https://github.com/user-attachments/assets/b98afda8-7bed-4c6a-a9b6-86952eb78f93" />
 
 *Окно управления активными сессиями:*
+<img width="1857" height="923" alt="image" src="https://github.com/user-attachments/assets/1524231d-0365-478d-938e-e0a553c1354c" />
 
 
 ---
