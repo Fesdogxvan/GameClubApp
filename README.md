@@ -60,17 +60,17 @@ cd GameClub
 
 ```text
 GameClub/
-├── db/                      # SQL-скрипты (создание БД и тестовые данные)
-├── src/                     # Исходный код
-│   ├── GameClub/            # Основной WPF-проект
-│   │   ├── Logic/           # Бизнес-логика (PasswordHasher, CostCalculator...)
-│   │   ├── Models/          # Сущности EF (Customer, Session и т.д.)
-│   │   ├── Pages/           # Страницы навигации (Main, Sessions, History...)
-│   │   ├── Windows/         # Модальные окна (редактирование, авторизация)
-│   │   ├── App.xaml         # Стили и точка входа
-│   │   └── App.config       # Строка подключения к БД
-│   └── GameClub.Tests/      # Проект unit-тестов (xUnit)
-└── README.md
+db/              # SQL-скрипты
+src/             # Исходный код
+GameClub/        # Основной WPF-проект
+  Logic/           # Бизнес-логика
+  Models/          # Сущности EF
+  Pages/           # Страницы навигации
+  Windows/         # Модальные окна
+  App.xaml         # Стили и точка входа
+  App.config       # Строка подключения к БД
+GameClub.Tests/  # Проект unit-тестов (xUnit)
+README.md
 ```
 
 ---
